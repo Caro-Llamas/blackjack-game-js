@@ -4,11 +4,17 @@ let isAlive = false;
 let message = "";
 let sum = 0;
 
+let player = {
+    name: 'Person',
+    chips: 145
+}
 
-
+let playerEl = document.querySelector("#player-el");
 let messageEl = document.querySelector(".message-el");
 let sumEl = document.querySelector("#sum-el");
 let cardsEl = document.querySelector("#cards-el");
+
+playerEl.textContent = `${player.name}: $${player.chips}`;
 
 function getRandomCard(){
     let randomNumber = Math.floor(Math.random()*13) + 1;
@@ -53,15 +59,12 @@ function renderGame(){
 function newCard(){
 
     if(isAlive && !hasBlackjack){
+        document.querySelector("#new-card-el").textContent = `Drawing a new card!`;
         let card = getRandomCard()
         sum += card
         cards.push(card)
         renderGame()
     }
-    document.querySelector("#new-card-el").textContent = `Drawing a new card!`;
-    let newCard = getRandomCard();
-    cards.push(newCard);
-    sum = sum + newCard;
     
     renderGame();
 }
